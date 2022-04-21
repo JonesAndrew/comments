@@ -79,7 +79,8 @@ class CommentBox extends React.Component {
     this.state = {text: ""};
   }
 
-  onSubmit() {
+  onSubmit(e) {
+    e.preventDefault();
     let data = {comment: this.state.text, name: CURRRENT_NAME};
     if (this.props.parentId)
       data.parent_id = this.props.parentId;
@@ -104,10 +105,10 @@ class CommentBox extends React.Component {
 
   render() {
     return (
-        <div class="one-line section-border">
+        <form onSubmit={this.onSubmit} class="one-line section-border">
           <input onChange={this.onChange} id="comment-line" type="text" class="form-control" placeholder="What are your thoughts?" value={this.state.text} />
-          <button onClick={this.onSubmit} type="submit" class="btn btn-default bg-primary reply">Submit</button>
-        </div>
+          <button type="submit" class="btn btn-default bg-primary reply">Submit</button>
+        </form>
     );
   }
 }
