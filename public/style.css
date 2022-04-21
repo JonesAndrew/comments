@@ -1,0 +1,18 @@
+div {
+	margin: 15px 0px;
+}
+
+* > :first-child { margin-top: 0 !important; margin-left: 0 !important; }
+* > :last-child { margin-bottom: 0 !important; margin-right: 0 !important; }
+
+.one-line {
+	display: flex;
+}
+
+.comment {
+	margin: 50px 0px;
+}
+
+.one-line > * {
+	margin: 0px 5px;
+}
