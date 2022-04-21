@@ -3,7 +3,7 @@ const express = require('express');
 const ws = require('ws');
 const bodyParser = require('body-parser');
 const app = express()
-const port = 3000
+const port = 80
 
 const uuid  = require('uuid');
 
