@@ -189,23 +189,6 @@ class Comments extends React.Component {
   }
 }
 
-class LikeButton extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { liked: false };
-  }
-
-  render() {
-    if (this.state.liked) {
-      return 'You liked this.';
-    }
-
-    return (
-      {}
-    );
-  }
-}
-
 const element = <Comments />
 const domContainer = document.querySelector('#comments_container');
 const root = ReactDOM.createRoot(domContainer);
