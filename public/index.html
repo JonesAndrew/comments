@@ -13,7 +13,7 @@
 	<script src="index.js"></script>
 
 	<script id="comment-template" type="text/x-handlebars-template">
-		<div class="comment one-line">
+		<div class="comment one-line" id="{{id}}">
 	  		<img alt="140x140" data-src="holder.js/140x140" class="rounded-circle" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgdmlld0JveD0iMCAwIDE0MCAxNDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzE0MHgxNDAKQ3JlYXRlZCB3aXRoIEhvbGRlci5qcyAyLjYuMC4KTGVhcm4gbW9yZSBhdCBodHRwOi8vaG9sZGVyanMuY29tCihjKSAyMDEyLTIwMTUgSXZhbiBNYWxvcGluc2t5IC0gaHR0cDovL2ltc2t5LmNvCi0tPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbI2hvbGRlcl8xODA0YTZlMTUzYyB0ZXh0IHsgZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQgfSBdXT48L3N0eWxlPjwvZGVmcz48ZyBpZD0iaG9sZGVyXzE4MDRhNmUxNTNjIj48cmVjdCB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjQ0LjA0Njg3NSIgeT0iNzQuNSI+MTQweDE0MDwvdGV4dD48L2c+PC9nPjwvc3ZnPg==" data-holder-rendered="true" style="width: 50px; height: 50px;">
 			<div>
 				<div class="one-line">
@@ -26,8 +26,8 @@
 				</div>
 				<div class="one-line">
 					<button class="font-weight-bold upvote sneaky-btn">▲ Upvote</button>
-					<p> </p>
-					<p class="font-weight-bold reply sneaky-btn">Reply</p>
+					<p> {{upvotes}} </p>
+					<p class="font-weight-bold sneaky-btn">Reply</p>
 				</div>
 			</div>
 		</div>
@@ -38,13 +38,17 @@
 	<title>Comments</title>
 </head>
 <body>
-	<div style="margin: 10px;">
-		<div style="padding-bottom: 15px;border-bottom: 1px solid black;" class="one-line">
-			<input type="text" class="form-control" placeholder="What are your thoughts?">
-			<button type="submit" class="btn btn-default bg-primary reply">Submit</button>
-		</div>
+	<div style="width: 100%; min-width: 320px; display: flex;
+            justify-content: center;">
+		<div style="padding: 10px; width: 1024px; margin: auto; display:block;">
+			<h1>Discuss</h1>
+			<div style="padding-bottom: 15px;border-bottom: 1px solid black;" class="one-line">
+				<input id="comment-line" type="text" class="form-control" placeholder="What are your thoughts?">
+				<button type="submit" class="btn btn-default bg-primary reply">Submit</button>
+			</div>
 
-		<div id="comments">
+			<div id="comments">
+			</div>
 		</div>
 	</div>
 </body>
