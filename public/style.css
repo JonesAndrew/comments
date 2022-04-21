@@ -16,3 +16,16 @@ div {
 .one-line > * {
 	margin: 0px 5px;
 }
+
+.sneaky-btn {
+	padding: 0;
+	border: none;
+	background: none;
+	outline: none;
+	cursor: pointer;
+}
+
+.sneaky-btn:focus {
+    border: none;
+    outline: none;
+}
