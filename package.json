@@ -13,7 +13,8 @@
   },
   "scripts": {
     "test": "cross-env NODE_ENV=test jest --testTimeout=10000",
-    "pretest": "rm comments.db"
+    "pretest": "rm comments.db",
+    "start": "node app.js"
   },
   "jest": {
     "testEnvironment": "node",
