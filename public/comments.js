@@ -80,10 +80,14 @@ class CommentBox extends React.Component {
   }
 
   onSubmit() {
+    let data = {comment: this.state.text, name: CURRRENT_NAME};
+    if (this.props.parentId)
+      data.parent_id = this.props.parentId;
+
     fetch('/api/comment', {
 
       method: 'POST', 
-      body: urlEncode({comment: this.state.text, parent_id: this.props.parentId, name: CURRRENT_NAME}),
+      body: urlEncode(data),
       headers: { 'content-type': 'application/x-www-form-urlencoded' },
 
     });

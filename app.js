@@ -32,9 +32,14 @@ app.get('/api/comments', (req, res) => {
 app.post('/api/comment', (req, res) => {
   let comment = req.body;
 
+  if (!comment.name || !comment.comment) {
+    res.status(400).send("invalid comment");
+    return;
+  }
+
   db.get(`INSERT INTO comments(comment_id, name, comment, parent_id) VALUES (?, ?, ?, ?)`, [uuid.v4(), comment.name, comment.comment, comment.parent_id], (err, row) => {
     if (err) {
-      res.status(400);
+      res.status(400).send("invalid comment");
       return;
     }
 
@@ -47,10 +52,9 @@ app.post('/api/comment', (req, res) => {
 })
 
 app.post('/api/upvote', (req, res) => {
-  console.log(req.body)
   db.get(`INSERT INTO upvotes(comment_id, name) VALUES (?, ?)`, [req.body.comment_id, req.body.name], (err, row) => {
     if (err) {
-      res.status(400);
+      res.status(400).send("invalid upvote");
       return;
     }
 
@@ -78,13 +82,17 @@ const db = new sqlite3.Database('./comments.db', (err) => {
     return;
   }
 
-  db.run('CREATE TABLE comments(comment_id TEXT PRIMARY KEY, name text, comment text, parent_id TEXT, timestamp DATETIME DEFAULT CURRENT_TIMESTAMP)', (err) => {
+  db.run('CREATE TABLE comments(comment_id TEXT PRIMARY KEY, name text, comment text, parent_id TEXT NULL, timestamp DATETIME DEFAULT CURRENT_TIMESTAMP, FOREIGN KEY (parent_id) REFERENCES comments(comment_id))', (err) => {
     if (err)
       console.log('Hopefully the tables already exist', err);
   });
 
-  db.run('CREATE TABLE upvotes(comment_id TEXT, name text, timestamp DATETIME DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY(comment_id, name))', (err) => {
+  db.run('CREATE TABLE upvotes(comment_id TEXT, name text, timestamp DATETIME DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY(comment_id, name), FOREIGN KEY (comment_id) REFERENCES comments(comment_id))', (err) => {
     if (err)
       console.log('Hopefully the tables already exist', err);
   });
+
+  db.get("PRAGMA foreign_keys = ON");
 })
+
+module.exports = server;
