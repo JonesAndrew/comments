@@ -160,8 +160,18 @@ class Comments extends React.Component {
 
   componentDidMount() {
       this.refresh();
+      
+      let serverUrl;
+      let scheme = 'ws';
+      let location = document.location;
 
-      this.socket = new WebSocket('ws://' + location.host);
+      if (location.protocol === 'https:') {
+        scheme += 's';
+      }
+
+      serverUrl = `${scheme}://${location.hostname}:${location.port}`;
+
+      this.socket = new WebSocket(serverUrl);
 
       let self = this;
       this.socket.onmessage = function(event) {
